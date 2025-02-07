@@ -1,17 +1,42 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+const navbars = [
+    {
+        text : "Home",
+        link : "#"
+    },
+    {
+        text : "Movies",
+        link : "#"
+    },
+    {
+        text : "TV Show",
+        link : "#"
+    },
+]
+
+const navbarItems = navbars.map((navbar, index) => {
+    return (
+        <Link key={index}
+            href={navbar.link}
+            className="text-white p-2"
+        >
+            {navbar.text}
+        </Link>
+    );
+}
+);
 
 const Navbar = () => {
     return (
-        <div className="p-4">
-            <div className="container mx-auto flex justify-between items-center">
+        <nav className="px-10 py-5 flex justify-between">
                 <div className="text-white text-2xl font-bold">Moovie</div>
                 <div>
-                    <a href="#" className="text-white p-2">Home</a>
-                    <a href="#" className="text-white p-2">Movies</a>
-                    <a href="#" className="text-white p-2">TV Show</a>
+                    {navbarItems}
                 </div>
-            </div>
-        </div>
+        </nav>
+        
     );
 }
 

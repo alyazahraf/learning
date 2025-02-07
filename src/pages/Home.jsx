@@ -1,7 +1,8 @@
 import React from "react";
 
 import Navbar from "../components/common/Navbar";
-import Trending from "../components/card/Trending";
+import Trending from "../components/app/Trending";
+import TopRatedCard from "../components/card/TopRatedCard";
 
 const Home = () => {
   return (
@@ -10,6 +11,9 @@ const Home = () => {
       <div>
         <Trending />
       </div>
+      {/* <div>
+        <TopRatedCard/>
+      </div> */}
     </div>
   );
 };
