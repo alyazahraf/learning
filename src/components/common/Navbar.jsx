@@ -4,22 +4,22 @@ import { Link } from 'react-router-dom';
 const navbars = [
     {
         text : "Home",
-        link : "#"
+        link : "/"
     },
     {
         text : "Movies",
-        link : "#"
+        link : "/movie"
     },
     {
         text : "TV Show",
-        link : "#"
+        link : "/tv"
     },
 ]
 
 const navbarItems = navbars.map((navbar, index) => {
     return (
         <Link key={index}
-            href={navbar.link}
+            to={navbar.link}
             className="text-white p-2"
         >
             {navbar.text}
@@ -30,9 +30,13 @@ const navbarItems = navbars.map((navbar, index) => {
 
 const Navbar = () => {
     return (
-        <nav className="px-10 py-5 flex justify-between">
-                <div className="text-white text-2xl font-bold">Moovie</div>
-                <div>
+        <nav className="pr-10 py-5 flex justify-between bg-transparent fixed w-full z-50 top-0 items-center">
+                <div className="text-white text-2xl font-bold">
+                    <Link to="/">
+                        Moovie
+                    </Link>
+                </div>
+                <div className='pr-10'>
                     {navbarItems}
                 </div>
         </nav>

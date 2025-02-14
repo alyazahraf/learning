@@ -4,7 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-black text-white
+    @apply bg-black text-white px-10 py-5
+  }
+
+  h1{
+    @apply text-2xl font-bold text-white pb-5
   }
 }
 
