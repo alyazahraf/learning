@@ -4,15 +4,36 @@ import axios from "axios";
 const baseUrl = config.BASE_API_URL;
 const apiKey = config.API_KEY;
 
-//HOME PAGE
-export async function trending(media = "movie", timeWindow = "day") {
+export async function searchMovie(query) {
   try {
-    const response = await axios.get(`${baseUrl}/trending/${media}/${timeWindow}`, {
+    const response = await axios.get(`${baseUrl}/search/multi`, {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
+      params: {
+        query,
+      },
     });
+
+    return response.data.results || [];
+  } catch (error) {
+    console.error("Error fetching search:", error);
+    return [];
+  }
+}
+//HOME PAGE
+export async function trendingMovie(media = "movie", timeWindow = "day") {
+  try {
+    const response = await axios.get(
+      `${baseUrl}/trending/${media}/${timeWindow}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     return response.data.results || [];
   } catch (error) {
@@ -20,38 +41,6 @@ export async function trending(media = "movie", timeWindow = "day") {
     return [];
   }
 }
-  
-// export async function trendingMovies(timeWindow = "day") {
-//   try {
-//     const response = await axios.get(`${baseUrl}/trending/movies/${timeWindow}`, {
-//       headers: {
-//         Authorization: `Bearer ${apiKey}`,
-//         "Content-Type": "application/json",
-//       },
-//     });
-
-//     return response.data.results || [];
-//   } catch (error) {
-//     console.error("Error fetching trending movies:", error);
-//     return [];
-//   }
-// }
-
-// export async function trendingTV(timeWindow = "day") {
-//   try {
-//     const response = await axios.get(`${baseUrl}/trending/tv/${timeWindow}`, {
-//       headers: {
-//         Authorization: `Bearer ${apiKey}`,
-//         "Content-Type": "application/json",
-//       },
-//     });
-
-//     return response.data.results || [];
-//   } catch (error) {
-//     console.error("Error fetching trending TV:", error);
-//     return [];
-//   }
-// }
 
 export async function getTopRated() {
   const response = await axios.get(`${baseUrl}/movie/top_rated`, {
@@ -78,9 +67,9 @@ export async function getCastMovie(movie_id) {
     headers: {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
-    },  
+    },
   });
-  return response.data.cast;
+  return response.data;
 }
 
 export async function getMovieTrailer(movie_id) {
@@ -110,19 +99,21 @@ export async function photosMovie(movie_id) {
       "Content-Type": "application/json",
     },
   });
-  return response.data.backdrops;
+  return response.data;
 }
 
 export async function recommendedMovies(movie_id) {
-  const response = await axios.get(`${baseUrl}/movie/${movie_id}/recommendations`, {
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await axios.get(
+    `${baseUrl}/movie/${movie_id}/recommendations`,
+    {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
   return response.data.results;
 }
-
 
 export async function similarMovies(movie_id) {
   const response = await axios.get(`${baseUrl}/movie/${movie_id}/similar`, {
@@ -134,6 +125,18 @@ export async function similarMovies(movie_id) {
   return response.data.results;
 }
 
+export async function socialMediaMovie(movie_id) {
+  const response = await axios.get(
+    `${baseUrl}/movie/${movie_id}/external_ids`,
+    {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response.data;
+}
 
 //MOVIES PAGE
 export async function discoverMovies() {

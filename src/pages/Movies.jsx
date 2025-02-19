@@ -10,23 +10,23 @@ const Movies = () => {
   return (
     <div className=" w-full min-h-screen">
       <Navbar />
-      <div className="flex gap-4 my-4 flex-col text-white rounded-lg w-full overflow-hidden pt-20 ">
-        <h1>Discover Movie</h1>
+      <div className="flex gap-10 mb-4 flex-col text-white rounded-lg w-full overflow-hidden pt-20 ">
         <div>
+          <h1>Discover Movie</h1>
           <DiscoverMovies />
         </div>
         <div>
           <NowPlaying />
-      </div>
-      <div>
-        <UpcomingMovie />
-      </div>
-      <div>
-        <PopularMovie />
-      </div>
-      <div>
-        <TopRatedCard />
-      </div>
+        </div>
+        <div>
+          <UpcomingMovie />
+        </div>
+        <div>
+          <PopularMovie />
+        </div>
+        <div>
+          <TopRatedCard />
+        </div>
       </div>
     </div>
   );

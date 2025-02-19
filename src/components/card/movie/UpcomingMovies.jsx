@@ -2,14 +2,15 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { upcomingMovies } from "../../../API/index";
 import { Link } from "react-router-dom";
 
 const UpcomingMovie = () => {
   const [upcomingMovie, setUpcomingMovie] = useState([]);
+  const swiperRef = useRef(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   useEffect(() => {
     const fetchUpcomingMovies = async () => {
@@ -19,32 +20,76 @@ const UpcomingMovie = () => {
     fetchUpcomingMovies();
   }, []);
 
+  const handleSlideChange = () => {
+    if (swiperRef.current?.swiper) {
+      setIsBeginning(swiperRef.current.swiper.isBeginning);
+      setIsEnd(swiperRef.current.swiper.isEnd);
+    }
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-white">Upcoming Movies</h1>
-      <Swiper
-        modules={[Navigation]}
-        slidesPerView={10}
-        navigation
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-      >
-        {upcomingMovie.map((movie) => (
-          <SwiperSlide key={movie.id} className="flex items-center">
-            <div className="flex flex-row items-center flex-y-center  rounded-2xl overflow-hidden relative z-10">
-              <div className=" h-full p-5">
-                <Link to={`/details/${movie.id}`}>
+      <div className="relative px-14">
+        <Swiper
+          ref={swiperRef}
+          modules={[Navigation]}
+          spaceBetween={10}
+          navigation={{
+            nextEl: ".top-rated-next",
+            prevEl: ".top-rated-prev",
+          }}
+          scrollbar={{ draggable: true }}
+          breakpoints={{
+            320: { slidesPerView: 2 },
+            480: { slidesPerView: 3 },
+            768: { slidesPerView: 5 },
+            1024: { slidesPerView: 7 },
+            1280: { slidesPerView: 10 },
+          }}
+          onSlideChange={handleSlideChange}
+        >
+          {upcomingMovie.map((movie) => (
+            <SwiperSlide key={movie.id}>
+              <Link to={`/details/${movie.id}`}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
-                  className="w-full h-auto rounded-lg object-fill"
+                  className="rounded-lg object-cover w-36"
                 />
-                </Link> 
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <button
+          className={`button-prev ${
+            isBeginning
+              ? "text-gray-500 cursor-not-allowed"
+              : "text-blue-500 hover:text-blue-700"
+          }`}
+          onClick={() => {
+            if (!isBeginning) {
+              swiperRef.current?.swiper.slidePrev();
+            }
+          }}
+        >
+          ❮
+        </button>
+        <button
+          className={`button-next ${
+            isEnd
+              ? "text-gray-500 cursor-not-allowed"
+              : "text-blue-500 hover:text-blue-700"
+          }`}
+          onClick={() => {
+            if (!isEnd) {
+              swiperRef.current?.swiper.slideNext();
+            }
+          }}
+        >
+          ❯
+        </button>
+      </div>
     </div>
   );
 };

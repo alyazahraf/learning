@@ -5,9 +5,8 @@ const Trending = () => {
   const [media, setMedia] = useState("movie");
   const [time, setTime] = useState("day");
 
-  
   return (
-    <div className="flex gap-4 my-4 flex-col text-white rounded-lg w-full overflow-hidden pt-20 ">
+    <div className="flex gap-4 mb-10 flex-col text-white rounded-lg w-full overflow-hidden pt-20 ">
       <div>
         <h1>Trending</h1>
       </div>

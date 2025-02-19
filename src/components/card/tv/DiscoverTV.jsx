@@ -4,66 +4,119 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { discoverTvShows } from "../../../API/index";
+import { FaStar } from "react-icons/fa";
 
 const DiscoverTV = () => {
+  EncodedAudioChunk;
   const [discoverTV, setDiscoverTV] = useState([]);
+  const swiperRef = useRef(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   useEffect(() => {
     const fetchDiscoverTV = async () => {
-        const movies = await discoverTvShows();
-        setDiscoverTV(movies);
-        }
-        fetchDiscoverTV();
+      const movies = await discoverTvShows();
+      setDiscoverTV(movies);
+    };
+    fetchDiscoverTV();
   }, []);
 
+  const handleSlideChange = () => {
+    if (swiperRef.current?.swiper) {
+      setIsBeginning(swiperRef.current.swiper.isBeginning);
+      setIsEnd(swiperRef.current.swiper.isEnd);
+    }
+  };
+
   return (
-    <Swiper
-      modules={[Navigation]}
-      slidesPerView={3}
-      navigation
-
-    >
-      {discoverTV?.map((movie) => (
-        <SwiperSlide key={movie?.id} className="flex items-center px-14">
-          <div className="flex flex-row items-center flex-y-center  rounded-2xl overflow-hidden relative z-10">
-            <div className=" h-full p-5">
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
-                alt={movie?.title}
-                className="w-full h-auto rounded-lg object-fill"
-              />
-            </div>
-            <div>
-              <h3 className="mt-2 text-center text-lg font-semibold">
-                {movie?.original_title}
-              </h3>
-
-              <div className="flex flex-row items-center flex-y-center gap-2">
-                <h3 className="mt-2 text-center text-lg font-semibold">
-                  {movie?.release_date}
-                </h3>
-                <h3 className="mt-2 text-center text-lg font-semibold">
-                  {movie?.vote_average}
-                </h3>
-                (
-                <h3 className="mt-2 text-center text-lg font-semibold">
-                  {movie?.vote_count}
-                </h3>
-                )
+    <div>
+      <div className="relative px-14">
+        <Swiper
+          ref={swiperRef}
+          modules={[Navigation]}
+          spaceBetween={20}
+          breakpoints={{
+            1280: { slidesPerView: 3 },
+            1024: { slidesPerView: 2 },
+            768: { slidesPerView: 1.5 },
+            0: { slidesPerView: 1 },
+          }}
+          onSlideChange={handleSlideChange}
+        >
+          {discoverTV?.map((movie) => (
+            <SwiperSlide key={movie.id} className="flex">
+              <div className="relative w-full rounded-2xl overflow-hidden bg-gray-900 shadow-lg transition-transform duration-300 hover:scale-[1.02]">
+                <img
+                  src={`https://image.tmdb.org/t/p/w780${movie.backdrop_path}`}
+                  alt={movie.title}
+                  className="absolute inset-0 w-full h-full object-cover opacity-40"
+                />
+                <div className="relative flex flex-row h-72 p-6">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    className="w-[150px] aspect-[2/3] object-cover rounded-lg shadow-lg"
+                  />
+                  <div className="ml-6 w-3/4 text-white">
+                    <h3 className="text-xl font-bold">
+                      {movie.title || movie.name}
+                    </h3>
+                    <p className="text-gray-400 text-sm">
+                      {movie.release_date}
+                    </p>
+                    <div className="flex items-center text-yellow-400 mt-1">
+                      <FaStar className="mr-1" /> {movie.vote_average}
+                      <span className="ml-1 text-gray-400">
+                        ({movie.vote_count})
+                      </span>
+                    </div>
+                    <p className="text-gray-300 text-sm mt-2 line-clamp-3">
+                      {movie.overview}
+                    </p>
+                    <a
+                      href={`/details/${movie.id}`}
+                      className="inline-block bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded mt-4"
+                    >
+                      Details
+                    </a>
+                  </div>
+                </div>
               </div>
-              <h3 className="mt-2 text-center text-lg font-semibold">
-                {movie?.overview}
-              </h3>
-            </div>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              <a href={`/details/${movie?.id}`}>Details</a>
-            </button>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <button
+          className={`button-prev ${
+            isBeginning
+              ? "text-gray-500 cursor-not-allowed"
+              : "text-blue-500 hover:text-blue-700"
+          }`}
+          onClick={() => {
+            if (!isBeginning) {
+              swiperRef.current?.swiper.slidePrev();
+            }
+          }}
+        >
+          ❮
+        </button>
+        <button
+          className={`button-next ${
+            isEnd
+              ? "text-gray-500 cursor-not-allowed"
+              : "text-blue-500 hover:text-blue-700"
+          }`}
+          onClick={() => {
+            if (!isEnd) {
+              swiperRef.current?.swiper.slideNext();
+            }
+          }}
+        >
+          ❯
+        </button>
+      </div>
+    </div>
   );
 };
 
