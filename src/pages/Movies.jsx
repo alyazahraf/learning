@@ -4,7 +4,7 @@ import Navbar from "../components/common/Navbar";
 import NowPlaying from "../components/card/movie/NowPlaying";
 import UpcomingMovie from "../components/card/movie/UpcomingMovies";
 import PopularMovie from "../components/card/movie/PopularMovies";
-import TopRatedCard from "../components/card/Home/TopRatedCard";
+import TopRatedCard from "../components/card/home/TopRatedCard";
 
 const Movies = () => {
   return (
