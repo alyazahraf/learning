@@ -7,6 +7,7 @@ import "swiper/css/scrollbar";
 import { useEffect, useState, useRef } from "react";
 import { discoverTvShows } from "../../../API/index";
 import { FaStar } from "react-icons/fa";
+import noImage from "../../../assets/no-img.jpg";
 
 const DiscoverTV = () => {
   EncodedAudioChunk;
@@ -49,31 +50,39 @@ const DiscoverTV = () => {
             <SwiperSlide key={movie.id} className="flex">
               <div className="relative w-full rounded-2xl overflow-hidden bg-gray-900 shadow-lg transition-transform duration-300 hover:scale-[1.02]">
                 <img
-                  src={`https://image.tmdb.org/t/p/w780${movie.backdrop_path}`}
-                  alt={movie.title}
+                  src={
+                    movie?.backdrop_path
+                      ? `https://image.tmdb.org/t/p/w780${movie?.backdrop_path}`
+                      : noImage
+                  }
+                  alt={movie?.title}
                   className="absolute inset-0 w-full h-full object-cover opacity-40"
                 />
                 <div className="relative flex flex-row h-72 p-6">
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
-                    className="w-[150px] aspect-[2/3] object-cover rounded-lg shadow-lg"
+                    src={
+                      movie?.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie?.poster_path}`
+                        : noImage
+                    }
+                    alt={movie?.title}
+                    className="w-[100px] 2xl:w-[150px] aspect-[2/] object-cover rounded-lg shadow-lg"
                   />
                   <div className="ml-6 w-3/4 text-white">
                     <h3 className="text-xl font-bold">
-                      {movie.title || movie.name}
+                      {movie?.title || movie?.name}
                     </h3>
                     <p className="text-gray-400 text-sm">
-                      {movie.release_date}
+                      {movie?.release_date}
                     </p>
                     <div className="flex items-center text-yellow-400 mt-1">
-                      <FaStar className="mr-1" /> {movie.vote_average}
+                      <FaStar className="mr-1" /> {movie?.vote_average}
                       <span className="ml-1 text-gray-400">
-                        ({movie.vote_count})
+                        ({movie?.vote_count})
                       </span>
                     </div>
                     <p className="text-gray-300 text-sm mt-2 line-clamp-3">
-                      {movie.overview}
+                      {movie?.overview}
                     </p>
                     <a
                       href={`/details/${movie.id}`}

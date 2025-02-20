@@ -12,7 +12,6 @@ const VideosMovie = () => {
     const fetchVideo = async () => {
       const response = await getMovieTrailer(params.id);
       setVideo(response);
-      console.log(response);
     };
     fetchVideo();
   }, []);

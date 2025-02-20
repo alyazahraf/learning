@@ -22,11 +22,11 @@ const TvShow = () => {
           <AiringToday />
         </div>
         <div>
-            <PopularTV />
-            </div>
-            <div>
-                <TopRatedTV />
-            </div>
+          <PopularTV />
+        </div>
+        <div>
+          <TopRatedTV />
+        </div>
       </div>
     </div>
   );

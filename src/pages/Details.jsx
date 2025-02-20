@@ -15,6 +15,7 @@ import Recommended from "../components/card/details/recommended";
 import Similar from "../components/card/details/similar";
 import DetailCard from "../components/card/details/detailCard";
 import SubNavbar from "../components/common/SubNavbar";
+import noImage from "../assets/no-img.jpg";
 
 const Details = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +46,11 @@ const Details = () => {
       <Navbar />
       <div className="min-h-screen flex items-center">
         <img
-          src={`https://image.tmdb.org/t/p/original${details?.backdrop_path}`}
+          src={
+            details?.backdrop_path
+              ? `https://image.tmdb.org/t/p/original${details?.backdrop_path}`
+              : noImage
+          }
           className="absolute top-0 left-0 w-full h-full object-cover brightness-75 -z-10 "
           alt={details?.title}
         />
@@ -55,7 +60,11 @@ const Details = () => {
           <div className="flex gap-10 items-center text-white flex-col lg:flex-row">
             <div className="md:scale-90 aspect-[5/7] flex-1 lg:basis-5/12 xl:basis-4/12">
               <img
-                src={`https://image.tmdb.org/t/p/w500${details?.poster_path}`}
+                src={
+                  details?.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${details?.poster_path}`
+                    : noImage
+                }
                 alt={details?.title}
                 className="rounded-lg object-cover"
               />

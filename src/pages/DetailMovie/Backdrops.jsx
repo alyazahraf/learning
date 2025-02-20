@@ -3,6 +3,7 @@ import SubNavbar from "../../components/common/SubNavbar";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { photosMovie } from "../../API";
+import noImage from "../../assets/no-img.jpg";
 
 const Backdrops = () => {
   const params = useParams();
@@ -26,8 +27,12 @@ const Backdrops = () => {
             {photos?.map((photo) => (
               <div key={photo.file_path} className="relative">
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${photo.file_path}`}
-                  alt={photo.file_path}
+                  src={
+                    photo?.file_path
+                      ? `https://image.tmdb.org/t/p/w500${photo.file_path}`
+                      : noImage
+                  }
+                  alt={photo?.file_path}
                   className="w-full h-full object-cover rounded-lg"
                 />
               </div>

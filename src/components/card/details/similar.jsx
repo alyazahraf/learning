@@ -5,6 +5,7 @@ import { similarMovies } from "../../../API/index";
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Navigation } from "swiper/modules";
+import noImage from "../../../assets/no-img.jpg";
 
 const Similar = () => {
   const [similar, setSimilar] = useState([]);
@@ -65,12 +66,16 @@ const Similar = () => {
             }}
             onSlideChange={handleSlideChange}
           >
-            {similar.map((movie) => (
-              <SwiperSlide key={movie.id}>
+            {similar?.map((movie) => (
+              <SwiperSlide key={movie?.id}>
                 <a href={`/details/${movie.id}`}>
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
+                    src={
+                      movie?.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : noImage
+                    }
+                    alt={movie?.title}
                     className="rounded-lg object-cover w-36"
                   />
                 </a>
@@ -79,7 +84,7 @@ const Similar = () => {
           </Swiper>
         )}
 
-        {similar.length > 0 && (
+        {similar?.length > 0 && (
           <>
             <button
               className={`button-prev ${

@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import { useEffect, useState, useRef } from "react";
 import { getTopRated } from "../../../API";
 import { Link } from "react-router-dom";
+import noImage from "../../../assets/no-img.jpg";
 
 const TopRatedCard = () => {
   const [topMovies, setTopMovies] = useState([]);
@@ -53,7 +54,11 @@ const TopRatedCard = () => {
             <SwiperSlide key={movie?.id}>
               <Link to={`/details/${movie?.id}`}>
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                  src={
+                    movie?.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${movie?.poster_path}`
+                      : noImage
+                  }
                   alt={movie?.title}
                   className="rounded-lg object-cover w-36"
                 />

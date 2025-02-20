@@ -3,6 +3,7 @@ import SubNavbar from "../../components/common/SubNavbar";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { photosMovie } from "../../API";
+import noImage from "../../assets/no-img.jpg";
 
 const Posters = () => {
   const params = useParams();
@@ -24,11 +25,15 @@ const Posters = () => {
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {photos?.map((photo) => (
-              <div key={photo.file_path} className="relative">
+              <div key={photo?.file_path} className="relative">
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${photo.file_path}`}
-                  alt={photo.file_path}
-                  className="w-full h-full object-cover rounded-lg"
+                  src={
+                    photo?.file_path
+                      ? `https://image.tmdb.org/t/p/original${photo.file_path}`
+                      : noImage
+                  }
+                  alt={photo?.file_path}
+                  className="w-full object-cover rounded-lg"
                 />
               </div>
             ))}

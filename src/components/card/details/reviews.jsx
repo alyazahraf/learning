@@ -20,9 +20,9 @@ const Reviews = () => {
       <h1 className="text-2xl font-bold mb-4">Reviews</h1>
       {review.length > 0 ? (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 items-center">
-          {review.slice(0, 5).map((reviewItem) => (
+          {review?.slice(0, 5).map((reviewItem) => (
             <div
-              key={reviewItem.id}
+              key={reviewItem?.id}
               className="border p-4 rounded-lg bg-gray-800 text-white"
             >
               <div className="flex items-center gap-1 mb-2">

@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import { useEffect, useState, useRef } from "react";
 import { onAirTvShows } from "../../../API/index";
 import { Link } from "react-router-dom";
+import noImage from "../../../assets/no-img.jpg";
 
 const OnAir = () => {
   const [onAir, setOnAir] = useState([]);
@@ -49,12 +50,16 @@ const OnAir = () => {
           }}
           onSlideChange={handleSlideChange}
         >
-          {onAir.map((movie) => (
-            <SwiperSlide key={movie.id}>
-              <Link to={`/details/${movie.id}`}>
+          {onAir?.map((movie) => (
+            <SwiperSlide key={movie?.id}>
+              <Link to={`/details/${movie?.id}`}>
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
+                  src={
+                    movie?.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${movie?.poster_path}`
+                      : noImage
+                  }
+                  alt={movie?.title}
                   className="rounded-lg object-cover w-36"
                 />
               </Link>

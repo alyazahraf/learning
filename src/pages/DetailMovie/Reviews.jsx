@@ -26,7 +26,7 @@ const ReviewsPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {review?.map((rev) => (
               <div
-                key={rev.id}
+                key={rev?.id}
                 className="border p-4 rounded-lg bg-gray-800 text-white"
               >
                 <div className="flex items-center gap-1 mb-2">
