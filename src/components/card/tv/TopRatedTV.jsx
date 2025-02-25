@@ -31,7 +31,7 @@ const TopRatedTV = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold text-white">Top Rated TV</h1>
-      <div className="relative px-14">
+      <div className="relative lg:px-14">
         <Swiper
           ref={swiperRef}
           modules={[Navigation]}

@@ -35,7 +35,7 @@ const TrendingCard = ({ media, time }) => {
 
   return (
     <div>
-      <div className="relative px-14 ">
+      <div className="relative lg:lg:px-14 ">
         <Swiper
           ref={swiperRef}
           modules={[Navigation]}

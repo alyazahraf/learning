@@ -22,7 +22,7 @@
   }
 
   .button-prev {
-    @apply absolute left-0 top-1/2 -translate-y-1/2 text-5xl hidden md:flex transition-colors duration-300;
+    @apply absolute left-0 top-1/2 -translate-y-1/2 text-5xl hidden md:flex transition-colors duration-300 z-10 w-10 h-10;
   }
 
   .button-next {

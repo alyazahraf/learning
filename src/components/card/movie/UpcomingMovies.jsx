@@ -31,7 +31,7 @@ const UpcomingMovie = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold text-white">Upcoming Movies</h1>
-      <div className="relative px-14">
+      <div className="relative lg:px-14">
         <Swiper
           ref={swiperRef}
           modules={[Navigation]}

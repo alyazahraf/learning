@@ -10,8 +10,8 @@ const Trending = () => {
       <div>
         <h1>Trending</h1>
       </div>
-      <div className="flex gap-4">
-        <div className="flex bg-gray-800 rounded-full p-1">
+      <div className="flex flex-col lg:flex-row gap-4">
+        <div className="flex bg-gray-800 rounded-full p-1 w-max">
           {["all", "movie", "tv"].map((item) => (
             <button
               key={item}
@@ -25,7 +25,7 @@ const Trending = () => {
           ))}
         </div>
 
-        <div className="flex bg-gray-800 rounded-full p-1">
+        <div className="flex bg-gray-800 rounded-full p-1 w-max">
           {["day", "week"].map((item) => (
             <button
               key={item}

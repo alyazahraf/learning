@@ -41,7 +41,7 @@ const Recommended = () => {
   return (
     <div className="pt-10">
       <h1>Recommended Movies</h1>
-      <div className="relative px-14">
+      <div className="relative lg:lg:px-14">
         {loading ? (
           <p className="text-white text-center">Loading...</p>
         ) : recommended.length === 0 ? (

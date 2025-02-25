@@ -44,7 +44,7 @@ const Details = () => {
   return (
     <div className=" w-full min-h-screen">
       <Navbar />
-      <div className="min-h-screen flex items-center">
+      <div className="min-h-screen flex items-center pt-20">
         <img
           src={
             details?.backdrop_path

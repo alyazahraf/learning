@@ -41,7 +41,7 @@ const Similar = () => {
   return (
     <div className="py-10">
       <h1>Similar Movies</h1>
-      <div className="relative px-14">
+      <div className="relative lg:lg:px-14">
         {loading ? (
           <p className="text-white text-center">Loading...</p>
         ) : similar.length === 0 ? (

@@ -33,7 +33,7 @@ const DiscoverTV = () => {
 
   return (
     <div>
-      <div className="relative px-14">
+      <div className="relative lg:px-14">
         <Swiper
           ref={swiperRef}
           modules={[Navigation]}
